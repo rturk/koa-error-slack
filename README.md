@@ -20,5 +20,5 @@ $ npm install koa-error-slack --save
 import errorToSlack from 'koa-error-slack';
 
 const app = new Koa();
-app.use(errorToSlack("https://my-slack-webhook/cha");
+app.use(errorToSlack("https://hooks.slack.com/services/my-webhook-channel");
 ```
