@@ -1,12 +1,12 @@
 {
   "name": "koa-error-slack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Koa - Send server errors to Slack",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run build",
-    "build": "rm -rf lib/* && babel src --ignore *.spec.js --out-dir lib"
+    "build": "rm -rf dist/* && babel src --ignore *.spec.js --out-dir dist"
   },
   "repository": {
     "type": "git",
