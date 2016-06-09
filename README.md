@@ -1,4 +1,4 @@
-# koa-error-sns
+# koa-error-slack
 This Middleware detects errors in Koa Servers and sends messages to a Slack (via webhook).
 
 ## How it works
