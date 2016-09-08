@@ -1,6 +1,6 @@
 {
   "name": "koa-error-slack",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Koa - Send server errors to Slack",
   "main": "dist/index.js",
   "scripts": {
