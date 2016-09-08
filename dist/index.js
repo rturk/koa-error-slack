@@ -3,20 +3,61 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.logGraphQLErrorToSlack = undefined;
 
+var logGraphQLErrorToSlack = exports.logGraphQLErrorToSlack = function () {
+  var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(webhook, error) {
+    var message, slack;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            message = {
+              message: error.message,
+              locations: error.locations,
+              stack: error.stack
+            };
+            _context2.prev = 1;
+            slack = new _nodeSlack2.default(webhook);
+            _context2.next = 5;
+            return slack.send({ text: JSON.stringify(message) });
+
+          case 5:
+            _context2.next = 10;
+            break;
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](1);
+
+            console.log("koa-error-slack: Unable to send error message to Slack", _context2.t0);
+
+          case 10:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this, [[1, 7]]);
+  }));
+
+  return function logGraphQLErrorToSlack(_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}();
 
 /**
  * Log Koa errors to Slack helper.
  */
 
+
 var logToSlack = function () {
-  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(webhook, ctx, start, error) {
+  var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(webhook, ctx, start, error) {
     var end, request, response, message, slack;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            _context2.prev = 0;
+            _context3.prev = 0;
 
             console.log("koa-error-slack: Error detected...");
             end = new Date();
@@ -62,29 +103,29 @@ var logToSlack = function () {
             //Create new Slack instance and publish
 
             slack = new _nodeSlack2.default(webhook);
-            _context2.next = 9;
+            _context3.next = 9;
             return slack.send({ text: JSON.stringify(message) });
 
           case 9:
-            _context2.next = 14;
+            _context3.next = 14;
             break;
 
           case 11:
-            _context2.prev = 11;
-            _context2.t0 = _context2["catch"](0);
+            _context3.prev = 11;
+            _context3.t0 = _context3["catch"](0);
 
-            console.log("koa-error-slack: Unable to send error message to Slack", _context2.t0);
+            console.log("koa-error-slack: Unable to send error message to Slack", _context3.t0);
 
           case 14:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2, this, [[0, 11]]);
+    }, _callee3, this, [[0, 11]]);
   }));
 
-  return function logToSlack(_x3, _x4, _x5, _x6) {
-    return ref.apply(this, arguments);
+  return function logToSlack(_x5, _x6, _x7, _x8) {
+    return _ref3.apply(this, arguments);
   };
 }();
 
@@ -112,7 +153,7 @@ function koaErrorLogToSlack(webhook) {
 
   console.log("koa-error-slack: Setting up...");
   return function () {
-    var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(ctx, next) {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(ctx, next) {
       var start;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -158,10 +199,12 @@ function koaErrorLogToSlack(webhook) {
     }));
 
     return function (_x, _x2) {
-      return ref.apply(this, arguments);
+      return _ref.apply(this, arguments);
     };
   }();
-}function time(start, end) {
+}
+
+function time(start, end) {
   var delta = end - start;
   delta = delta < 10000 ? delta + 'ms' : Math.round(delta / 1000) + 's';
   return delta;

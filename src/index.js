@@ -27,10 +27,24 @@ export default function koaErrorLogToSlack(webhook) {
   }
 }
 
+export async function logGraphQLErrorToSlack(webhook, error) {
+  const message = {
+    message: error.message,
+    locations: error.locations,
+    stack: error.stack,
+  };
+
+  try {
+    const slack = new Slack(webhook);
+    await slack.send({ text: JSON.stringify(message) });
+  } catch (err) {
+    console.log("koa-error-slack: Unable to send error message to Slack",err);
+  }
+}
+
 /**
  * Log Koa errors to Slack helper.
  */
-
 async function logToSlack(webhook, ctx, start, error) {
   try {
     console.log("koa-error-slack: Error detected...");
