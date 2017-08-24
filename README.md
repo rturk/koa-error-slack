@@ -1,4 +1,6 @@
 # koa-error-slack
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/rturk/koa-error-slack.svg)](https://greenkeeper.io/)
 This Middleware detects errors in Koa Servers and sends messages to a Slack (via webhook).
 
 ## How it works
